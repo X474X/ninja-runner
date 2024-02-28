@@ -1,27 +1,38 @@
-const ground1 = document.querySelector(".ground1");
-const ground2 = document.querySelector(".ground2");
-const ninjaRun = document.querySelector(".ninja-run");
-let i = 0;
+import { groundMove, shurikenMove } from "./controls/move.js";
+import { gameElements } from "./controls/gameElements.js";
 
-ground1.style.left = 0;
-ground2.style.right = "-848px";
+let i = 0;
+let press = true;
 
 setInterval(() => {
-  ground1.style.left = parseInt(ground1.style.left) - 1 + "px";
-  ground2.style.right = parseInt(ground2.style.right) + 1 + "px";
-
-  if (parseInt(ground1.style.left) <= -848) {
-    ground1.style.left = "849px";
-  }
-  if (parseInt(ground2.style.right) >= 848) {
-    ground2.style.right = "-849px";
-  }
+  groundMove(1);
+  groundMove(2);
 }, 5);
 
 setInterval(() => {
-  ninjaRun.src = `./images/ninja/run/Run__00${i}.png`;
+  gameElements.ninjaRun.src = `./images/ninja/run/Run__00${i}.png`;
   i++;
   if (i > 9) {
     i = 0;
   }
 }, 45);
+
+window.addEventListener("keypress", (event) => {
+  if (event.key === "q" && press) {
+    press = false;
+    const image = document.createElement("img");
+    image.src = "./images/shuriken.png";
+    image.classList.add("shuriken");
+    image.style.bottom =
+      parseInt(gameElements.ninjaRun.style.bottom) + 40 + "px";
+    image.style.right = parseInt(gameElements.ninjaRun.style.right) - 20 + "px";
+    gameElements.gameWrapper.appendChild(image);
+    shurikenMove(image);
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  if (event.key === "q") {
+    press = true;
+  }
+});
