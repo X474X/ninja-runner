@@ -27,4 +27,16 @@ const shurikenMove = (image) => {
   }, 15);
 };
 
-export { groundMove, shurikenMove };
+const zombieMove = () => {
+  setInterval(() => {
+    gameElements.zombieRun.style.right =
+      parseInt(gameElements.zombieRun.style.right) + 1 + "px";
+    if (parseInt(gameElements.zombieRun.style.right) > 850) {
+      setTimeout(() => {
+        gameElements.zombieRun.style.right = "-120px";
+      }, 1000);
+    }
+  }, 2);
+};
+
+export { groundMove, shurikenMove, zombieMove };

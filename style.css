@@ -33,10 +33,12 @@ body {
 }
 .ground1 {
   left: 0;
+  z-index: 2;
 }
 .ground2 {
   right: -848px;
   transform: rotateY(180deg);
+  z-index: 2;
 }
 .ninja-run {
   position: absolute;
@@ -44,6 +46,15 @@ body {
   bottom: 110px;
   right: 610px;
   z-index: 1;
+}
+
+.zombie-run {
+  position: absolute;
+  width: 130px;
+  bottom: 110px;
+  right: -120px;
+  z-index: 1;
+  transform: rotateY(180deg);
 }
 
 .hearts {
